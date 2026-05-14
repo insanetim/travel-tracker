@@ -1,0 +1,136 @@
+.wishlist-page {
+  padding: 2rem 0;
+
+  .wishlist-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0;
+      color: #212529;
+    }
+
+    .clear-btn {
+      padding: 0.5rem 1rem;
+      font-weight: 500;
+    }
+  }
+
+  .results-container {
+    .results-count {
+      font-size: 1.1rem;
+      color: #6c757d;
+      margin-bottom: 1.5rem;
+    }
+
+    .place-card {
+      border: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      }
+
+      .card-body {
+        padding: 1.5rem;
+      }
+
+      .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        color: #212529;
+      }
+
+      .card-text {
+        margin-bottom: 0.5rem;
+        line-height: 1.5;
+      }
+
+      .rating {
+        .badge {
+          font-size: 0.9rem;
+          padding: 0.5rem 0.75rem;
+        }
+      }
+
+      .card-actions {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid #dee2e6;
+
+        .btn {
+          flex: 1;
+          font-weight: 500;
+          border-radius: 6px;
+          padding: 0.5rem 1rem;
+        }
+      }
+    }
+  }
+
+  .empty-wishlist {
+    .alert {
+      border: none;
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+
+      .alert-heading {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      .btn {
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        border-radius: 8px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .wishlist-page {
+    padding: 1rem 0;
+
+    .page-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+
+      .page-title {
+        font-size: 2rem;
+      }
+
+      .clear-btn {
+        width: 100%;
+      }
+    }
+
+    .place-card {
+      .card-actions {
+        flex-direction: column;
+
+        .btn {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
