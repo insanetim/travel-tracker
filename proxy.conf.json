@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "target": "https://places-api.foursquare.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}

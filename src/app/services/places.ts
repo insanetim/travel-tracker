@@ -6,7 +6,7 @@ import { CacheEntry, Place } from '../types';
 
 @Injectable({ providedIn: 'root' })
 export class PlacesService {
-  private baseUrl = 'https://api.foursquare.com/v3/places';
+  private baseUrl = '/api/places';
   private headers: HttpHeaders;
   private cache = new Map<string, CacheEntry>();
   private cacheDuration = 10 * 60 * 1000;
@@ -15,6 +15,7 @@ export class PlacesService {
     this.headers = new HttpHeaders({
       Authorization: `Bearer ${environment.foursquareApiKey}`,
       'Content-Type': 'application/json',
+      'X-Places-Api-Version': '2025-06-17',
     });
   }
 
@@ -33,7 +34,6 @@ export class PlacesService {
       ll: `${lat},${lng}`,
       radius: '50000',
       limit: '20',
-      fields: 'fsq_id,name,categories,location,geocodes,distance,rating,photos',
     };
 
     return this.http

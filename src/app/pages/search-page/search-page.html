@@ -1,1 +1,95 @@
-<p>search-page works!</p>
+<div class="search-page">
+  <div class="search-container">
+    <h1 class="page-title mb-4">Find Places to Visit</h1>
+
+    <div class="search-form card">
+      <div class="card-body">
+        <div class="mb-3">
+          <label for="keyword" class="form-label">Search Keyword</label>
+          <input
+            type="text"
+            class="form-control"
+            id="keyword"
+            [(ngModel)]="keyword"
+            placeholder="e.g., restaurant, museum, park"
+          />
+        </div>
+
+        <button class="btn btn-primary w-100" (click)="onSearch()" [disabled]="loading">
+          @if (loading) {
+            <span class="spinner-border spinner-border-sm me-2"></span>
+          }
+          {{ loading ? 'Searching...' : 'Search' }}
+        </button>
+
+        @if (error) {
+          <div class="alert alert-danger mt-3">
+            {{ error }}
+          </div>
+        }
+      </div>
+    </div>
+
+    @if (places.length > 0) {
+      <div class="results-container mt-4">
+        <h2 class="results-title">Search Results ({{ places.length }})</h2>
+        <div class="row">
+          @for (place of places; track place.fsq_place_id) {
+            <div class="col-md-6 col-lg-4 mb-4">
+              <div class="card place-card h-100">
+                <div class="card-body">
+                  <h5 class="card-title">{{ place.name }}</h5>
+                  <p class="card-text text-muted">
+                    <small>
+                      @for (cat of place.categories; track cat; let last = $last) {
+                        {{ cat.name }}{{ last ? '' : ', ' }}
+                      }
+                    </small>
+                  </p>
+                  <p class="card-text">
+                    {{ place.location.formatted_address || 'Address not available' }}
+                  </p>
+                  @if (place.rating) {
+                    <div class="rating mb-2">
+                      <span class="badge bg-warning text-dark">{{ place.rating }}/10 </span>
+                    </div>
+                  }
+                  @if (place.distance) {
+                    <div class="distance mb-3">
+                      <small class="text-muted">
+                        {{ (place.distance / 1000).toFixed(1) }} km away
+                      </small>
+                    </div>
+                  }
+                  <div class="card-actions">
+                    <a
+                      class="btn btn-sm btn-outline-primary me-2"
+                      [routerLink]="['/place', place.fsq_place_id]"
+                    >
+                      View Details
+                    </a>
+                    <button
+                      class="btn btn-sm"
+                      [class.btn-outline-success]="!isInWishlist(place.fsq_place_id)"
+                      [class.btn-success]="isInWishlist(place.fsq_place_id)"
+                      (click)="onAddToWishlist(place)"
+                      [disabled]="isInWishlist(place.fsq_place_id)"
+                    >
+                      {{ isInWishlist(place.fsq_place_id) ? '✓ In Wishlist' : '+ Add to Wishlist' }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    @if (!loading && places.length === 0 && hasSearched) {
+      <div class="no-results mt-4">
+        <div class="alert alert-info">No places found. Try a different keyword.</div>
+      </div>
+    }
+  </div>
+</div>

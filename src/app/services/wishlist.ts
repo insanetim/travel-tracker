@@ -33,7 +33,7 @@ export class WishlistService {
   }
 
   addToWishlist(place: Place): Observable<Place[]> {
-    const exists = this.wishlist.some((p) => p.fsq_id === place.fsq_id);
+    const exists = this.wishlist.some((p) => p.fsq_place_id === place.fsq_place_id);
     if (!exists) {
       this.wishlist.push(place);
       this.saveWishlist();
@@ -42,13 +42,13 @@ export class WishlistService {
   }
 
   removeFromWishlist(fsqId: string): Observable<Place[]> {
-    this.wishlist = this.wishlist.filter((p) => p.fsq_id !== fsqId);
+    this.wishlist = this.wishlist.filter((p) => p.fsq_place_id !== fsqId);
     this.saveWishlist();
     return of([...this.wishlist]);
   }
 
   isInWishlist(fsqId: string): boolean {
-    return this.wishlist.some((p) => p.fsq_id === fsqId);
+    return this.wishlist.some((p) => p.fsq_place_id === fsqId);
   }
 
   clearWishlist(): Observable<Place[]> {

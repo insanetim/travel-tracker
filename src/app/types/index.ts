@@ -1,5 +1,7 @@
 export interface Place {
-  fsq_id: string;
+  fsq_place_id: string;
+  latitude: number;
+  longitude: number;
   name: string;
   categories: { name: string }[];
   location: { formatted_address: string };
