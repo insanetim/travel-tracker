@@ -16,3 +16,8 @@ export interface CacheEntry {
   data: Place[];
   timestamp: number;
 }
+
+export interface GeolocationPosition {
+  latitude: number;
+  longitude: number;
+}

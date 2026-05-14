@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { GeolocationService } from '../../services/geolocation';
 import { PlacesService } from '../../services/places';
 import { WishlistService } from '../../services/wishlist';
 import { Place } from '../../types';
@@ -24,6 +25,7 @@ export class SearchPage {
     private wishlistService: WishlistService,
     private router: Router,
     private cdr: ChangeDetectorRef,
+    private geolocationService: GeolocationService,
   ) {}
 
   onSearch(): void {
@@ -37,14 +39,25 @@ export class SearchPage {
     this.places = [];
     this.hasSearched = true;
 
-    this.placesService.searchPlaces(this.keyword, 50.4501, 30.5234).subscribe({
-      next: (results) => {
-        this.places = results || [];
-        this.loading = false;
-        this.cdr.detectChanges();
+    this.geolocationService.getCurrentPosition().subscribe({
+      next: (position) => {
+        this.placesService
+          .searchPlaces(this.keyword, position.latitude, position.longitude)
+          .subscribe({
+            next: (results) => {
+              this.places = results || [];
+              this.loading = false;
+              this.cdr.detectChanges();
+            },
+            error: (err) => {
+              this.error = 'Failed to search places. Please try again.';
+              this.loading = false;
+              this.cdr.detectChanges();
+            },
+          });
       },
       error: (err) => {
-        this.error = 'Failed to search places. Please try again.';
+        this.error = 'Failed to get your location. Please try again.';
         this.loading = false;
         this.cdr.detectChanges();
       },
