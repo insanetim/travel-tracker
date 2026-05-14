@@ -13,7 +13,7 @@ export class PlacesService {
 
   constructor(private http: HttpClient) {
     this.headers = new HttpHeaders({
-      Authorization: environment.foursquareApiKey,
+      Authorization: `Bearer ${environment.foursquareApiKey}`,
       'Content-Type': 'application/json',
     });
   }
