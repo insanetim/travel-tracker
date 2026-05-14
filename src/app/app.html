@@ -1,18 +1,16 @@
-<header class="header">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container">
-    <nav class="navbar">
-      <a class="navbar-brand" routerLink="/">
-        <img class="navbar-logo" src="location.png" alt="Travel Tracker" />
-        <span class="navbar-title">Travel Tracker</span>
-      </a>
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="btn" routerLink="/wishlist" routerLinkActive="active">Wishlist</a>
-        </li>
-      </ul>
-    </nav>
+    <a class="navbar-brand" routerLink="/search">
+      <img class="navbar-logo" src="location.png" alt="Travel Tracker" />
+      <span class="navbar-title">Travel Tracker</span>
+    </a>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/wishlist" routerLinkActive="active">Wishlist</a>
+      </li>
+    </ul>
   </div>
-</header>
+</nav>
 
 <div class="container workspace">
   <router-outlet></router-outlet>

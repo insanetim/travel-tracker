@@ -1,3 +1,5 @@
+@import 'bootstrap/scss/bootstrap';
+
 :root {
   --primary-color: #2c3e50;
   --secondary-color: #4b7a99;
@@ -20,33 +22,7 @@ body {
   color: var(--dark-color);
 }
 
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
 .workspace {
-  padding: 2rem;
-}
-
-.btn {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background-color: var(--primary-color);
-  color: var(--light-color);
-  border: none;
-  border-radius: 0.25rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-  text-decoration: none;
-
-  &:hover {
-    background-color: var(--secondary-color);
-  }
-
-  &.active {
-    background-color: var(--secondary-color);
-  }
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
