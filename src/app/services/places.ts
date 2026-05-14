@@ -49,15 +49,8 @@ export class PlacesService {
 
   getPlaceDetails(fsqId: string): Observable<Place> {
     const params = {
-      fields: 'fsq_id,name,categories,location,geocodes,rating,photos,tips',
+      // fields: 'fsq_id,name,categories,location,geocodes,rating,photos,tips', // available only in premium plan
     };
     return this.http.get<Place>(`${this.baseUrl}/${fsqId}`, { headers: this.headers, params });
-  }
-
-  getPlaceTips(fsqId: string): Observable<{ tips: { text: string; created_at: string }[] }> {
-    return this.http.get<{ tips: { text: string; created_at: string }[] }>(
-      `${this.baseUrl}/${fsqId}/tips`,
-      { headers: this.headers, params: { limit: '5' } },
-    );
   }
 }

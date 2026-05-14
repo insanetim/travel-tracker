@@ -1,1 +1,43 @@
-<p>place-page works!</p>
+@if (place$ | async; as place) {
+  <div class="place-details">
+    <div class="place-details__header">
+      <h1>{{ place.name }}</h1>
+      <button
+        (click)="toggleWishlist(place)"
+        class="btn"
+        [class.btn-success]="!isInWishlist"
+        [class.btn-outline-success]="isInWishlist"
+      >
+        @if (isInWishlist) {
+          <span>Remove from Wishlist</span>
+        } @else {
+          <span>Add to Wishlist</span>
+        }
+      </button>
+    </div>
+    @if (place.categories && place.categories.length > 0) {
+      <p class="categories">{{ place.categories.map((c) => c.name).join(', ') }}</p>
+    }
+    @if (place.location.formatted_address) {
+      <p class="address">{{ place.location.formatted_address }}</p>
+    }
+    @if (place.rating) {
+      <p class="rating">Rating: {{ place.rating }}/10</p>
+    }
+    @if (place.photos && place.photos.length > 0) {
+      <div class="photos">
+        @for (photo of place.photos; track photo.id) {
+          <img [src]="photo.prefix + '300x300' + photo.suffix" [alt]="place.name" />
+        }
+      </div>
+    }
+    @if (place.tips && place.tips.length > 0) {
+      <div class="tips">
+        <h2>Tips</h2>
+        @for (tip of place.tips; track tip.text) {
+          <p>{{ tip.text }}</p>
+        }
+      </div>
+    }
+  </div>
+}
