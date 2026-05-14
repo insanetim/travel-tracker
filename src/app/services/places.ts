@@ -4,10 +4,8 @@ import { map, Observable, of, shareReplay, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { CacheEntry, Place } from '../types';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class Places {
+@Injectable({ providedIn: 'root' })
+export class PlacesService {
   private baseUrl = 'https://api.foursquare.com/v3/places';
   private headers: HttpHeaders;
   private cache = new Map<string, CacheEntry>();
